@@ -40,7 +40,7 @@ export class MapPage {
       position: this.map.getCenter()
     })
 
-    let content = "<h4> Dan's House </h4>"
+    let content = "<h4> My Location </h4>"
 
     this.addInfoWindow(marker, content)
   }
