@@ -1,10 +1,12 @@
 import {Page} from 'ionic-angular'
+import {Geolocation} from 'ionic-native'
 
 @Page({
   templateUrl: 'build/pages/map/map.html'
 })
 
 export class MapPage {
+
   constructor() {
     this.map = null
     this.loadMap()
@@ -13,7 +15,7 @@ export class MapPage {
   loadMap() {
     let options = {timeout: 10000, enableHighAccuracy: true}
 
-    navigator.geolocation.getCurrentPosition(
+    Geolocation.getCurrentPosition().then(
       (position) => {
         let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
 
