@@ -10,6 +10,7 @@ export class MapPage {
   constructor() {
     this.map = null
     this.loadMap()
+    this.location = {}
   }
 
   loadMap() {
@@ -17,10 +18,10 @@ export class MapPage {
 
     Geolocation.getCurrentPosition().then(
       (position) => {
-        let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+        this.location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
 
         let mapOptions = {
-          center: latLng,
+          center: this.location,
           zoom: 15,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
@@ -39,12 +40,13 @@ export class MapPage {
     let marker = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
-      position: this.map.getCenter()
+      position: this.location
     })
 
     let content = "<h4> My Location </h4>"
 
     this.addInfoWindow(marker, content)
+    this.map.setCenter(this.location)
   }
 
   addInfoWindow(marker, content) {
